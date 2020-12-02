@@ -4,6 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+module.exports.budget = "£20";
+const participants = ["Nora", "Tracey", "Des", "Morgan", "Matthew", "Kieran", "Connor"];
+const results = setResults();
+module.exports.results = results;
 const indexRouter = require('./routes/index');
 const resultRouter = require('./routes/result');
 
@@ -20,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-// app.use('/result', resultRouter());
+app.use('/find_santa', resultRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,9 +42,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const participants = ["Nora", "Tracey", "Des", "Morgan", "Matthew", "Kieran", "Connor"];
-const budget = 20;
-
 function setResults () {
 
   let length = participants.length;
@@ -49,27 +50,27 @@ function setResults () {
     return null;
   }
 
-  var results = {}
+  var results = {};
 
-  console.log(participants);
-
-  let notTaken = participants;
+  let notTaken;
+  notTaken = participants.map((x) => x);
   let notTakenLength = notTaken.length;
   for (let i = 0; i < length; i++) {
+    do {
+      var randomIndex = Math.floor(Math.random() * notTakenLength);
+    } while (notTaken[randomIndex] === participants[i]);
 
-    var randomIndex = Math.floor(Math.random() * notTakenLength);
-
-    if (i !== randomIndex) {
-      results[participants[i]] = notTaken[randomIndex];
-      notTaken[randomIndex] = null;
-      notTaken = cleanArray(notTaken);
-      notTakenLength--;
-    }
+    results[participants[i]] = notTaken[randomIndex];
+    notTaken[randomIndex] = null;
+    notTaken = cleanArray(notTaken);
+    notTakenLength--;
   }
 
 
   return results
 }
+
+//enter the name of the santa and returns the person it's for.
 
 //Takes out array elements that are === null
 function cleanArray(arr) {
@@ -83,6 +84,6 @@ function cleanArray(arr) {
   return cleanArr;
 }
 
-console.log(setResults());
+// console.table(results);
 
 module.exports = app;

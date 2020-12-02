@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}, select your name from the dropdown and then press "#{button}" and get the person you're buying for this Christmas.
+  p Good Luck, your budget is #{budget}
+  form(action='/find_santa/', method='GET')
+    select(id='santa',name='santa')
+      each santa in santas
+        option(value=santa) #{santa}
+    input(type='submit', value=button)
+  br
+  br
+  img(src="images/IMG_8947.JPG" width="80%" height="20%")
