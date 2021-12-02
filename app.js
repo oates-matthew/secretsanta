@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 module.exports.budget = "£20";
-const participants = ["Nora", "Tracey", "Des", "Morgan", "Matthew", "Kieran", "Connor"];
+const participants = ["Nora", "Tracey", "Des", "Morgan","Rory", "Matthew","Leah","Kerry", "Kieran", "Connor"];
 const results = setResults();
 module.exports.results = results;
 const indexRouter = require('./routes/index');
@@ -17,7 +17,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
