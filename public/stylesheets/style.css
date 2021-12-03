@@ -1,10 +1,10 @@
 body {
   padding: 50px;
   width:85%;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 img {
-  width:fit-content;
+  width:65%;
 }
 a {
   color: #00B7FF;
