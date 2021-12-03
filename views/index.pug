@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1= title
-  h6 Welcome to #{title}, select your name from the dropdown and then press "#{button}" and get the person you're buying for this Christmas.
-  h6 Good Luck, your budget is #{budget}
+  h3 Welcome to #{title}, select your name from the dropdown and then press "#{button}" and get the person you're buying for this Christmas.
+  h3 Good Luck, your budget is #{budget}
   form(action='/find_santa/', method='GET')
     select(id='santa',name='santa')
       each santa in santas
